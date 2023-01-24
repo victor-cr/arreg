@@ -3,11 +3,17 @@
  */
 package com.codegans.arreg;
 
+import com.codegans.arreg.model.Person;
 import com.codegans.arreg.ui.PersonFilter;
+import com.codegans.arreg.ui.PersonList;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.application.Application;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class App extends Application {
     public static void main(String[] args) {
@@ -18,9 +24,13 @@ public class App extends Application {
     public void start(Stage primaryStage) {
         VBox layout = new VBox();
         PersonFilter filter = new PersonFilter();
+        PersonList list = new PersonList(List.of(new Person(UUID.randomUUID(), "Abb", "sdasd", "Dfdfsdf")));
 
         layout.setFillWidth(true);
-        layout.getChildren().add(filter.render());
+        layout.getChildren().addAll(
+                filter.render(),
+                list.render()
+        );
 
         Scene scene = new Scene(layout);
 
