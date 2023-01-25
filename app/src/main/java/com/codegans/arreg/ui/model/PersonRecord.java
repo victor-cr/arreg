@@ -6,12 +6,18 @@ import javafx.beans.property.SimpleStringProperty;
 import java.util.UUID;
 
 public class PersonRecord {
-    private SimpleStringProperty id;
-    private SimpleStringProperty lastName;
-    private SimpleStringProperty firstName;
-    private SimpleStringProperty middleName;
+    private final SimpleStringProperty id;
+    private final SimpleStringProperty lastName;
+    private final SimpleStringProperty firstName;
+    private final SimpleStringProperty middleName;
+    private final SimpleStringProperty position;
 
     public PersonRecord() {
+        this.id = new SimpleStringProperty(UUID.randomUUID().toString());
+        this.lastName = new SimpleStringProperty();
+        this.firstName = new SimpleStringProperty();
+        this.middleName = new SimpleStringProperty();
+        this.position = new SimpleStringProperty();
     }
 
     public PersonRecord(Person person) {
@@ -19,6 +25,7 @@ public class PersonRecord {
         this.lastName = new SimpleStringProperty(person.lastName());
         this.firstName = new SimpleStringProperty(person.firstName());
         this.middleName = new SimpleStringProperty(person.middleName());
+        this.position = new SimpleStringProperty();
     }
 
     public String getId() {
