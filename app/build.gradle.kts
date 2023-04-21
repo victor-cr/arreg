@@ -7,10 +7,14 @@
  */
 
 plugins {
-    // Apply the application plugin to add support for building a CLI application in Java.
-    application
-    id("org.openjfx.javafxplugin") version "0.0.13"
+    java
+    id("org.springframework.boot") version "3.0.6"
+    id("io.spring.dependency-management") version "1.1.0"
 }
+
+group = "com.codegans"
+version = "0.0.1-SNAPSHOT"
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -18,23 +22,24 @@ repositories {
 }
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    runtimeOnly("com.h2database:h2")
     // Use JUnit Jupiter for testing.
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
-
-    // This dependency is used by the application.
-    implementation("org.openjfx:javafx:19.0.2.1")
-    implementation("com.google.guava:guava:31.1-jre")
 }
 
-javafx {
-    version = "19"
-    modules = listOf("javafx.controls")
-}
-
-application {
-    // Define the main class for the application.
-    mainClass.set("com.codegans.arreg.App")
-}
+//javafx {
+//    version = "19"
+//    modules = listOf("javafx.controls")
+//}
+//
+//application {
+//    // Define the main class for the application.
+//    mainClass.set("com.codegans.arreg.App")
+//}
 
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
