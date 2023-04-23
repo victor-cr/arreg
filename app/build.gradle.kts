@@ -22,24 +22,14 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     runtimeOnly("com.h2database:h2")
+    implementation("org.slf4j:slf4j-api")
     // Use JUnit Jupiter for testing.
-    testImplementation("org.junit.jupiter:junit-jupiter:5.9.1")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
-
-//javafx {
-//    version = "19"
-//    modules = listOf("javafx.controls")
-//}
-//
-//application {
-//    // Define the main class for the application.
-//    mainClass.set("com.codegans.arreg.App")
-//}
 
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
