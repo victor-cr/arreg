@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Personnel</title>
+</head>
+<body>
+    <div>
+        <h3>Personnel</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Last name</th>
+                    <th>First name</th>
+                    <th>Middle name</th>
+                    <th>Birth date</th>
+                    <th>Birth place</th>
+                    <th>Itn</th>
+                    <th>Blood group</th>
+                    <th>Blood RhD</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="person:${personnel}">
+                    <td th:text="${person.lastName}"></td>
+                    <td th:text="${person.firstName}"></td>
+                    <td th:text="${person.middleName}"></td>
+                    <td th:text="${person.birthDate}"></td>
+                    <td th:text="${person.birthPlace}"></td>
+                    <td th:text="${person.itn}"></td>
+                    <td th:text="${person.bloodGroup}"></td>
+                    <td th:text="${person.bloodRhD}"></td>
+                    <td><a th:href="@{/personnel/{id}(id=${person.id})}">Info</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <hr/>
+        <a th:href="@{/personnel/add}">Add Person</a>
+
+    </div>
+</body>
+</html>

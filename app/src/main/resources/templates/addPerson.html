@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Person</title>
+</head>
+<body>
+    <div>
+        <h2>Add Person</h2>
+        <form action="#" th:action="@{/personnel/save}" th:object="${person}" method="POST">
+            <input type="text" th:field="*{lastName}" placeholder="Last name"/>
+            <input type="text" th:field="*{firstName}" placeholder="First name"/>
+            <input type="text" th:field="*{middleName}" placeholder="Middle name"/>
+            <input type="text" th:field="*{birthDate}" placeholder="Birth date"/>
+            <input type="text" th:field="*{birthPlace}" placeholder="Birth place"/>
+            <input type="text" th:field="*{itn}" placeholder="Itn"/>
+            <input type="text" th:field="*{bloodGroup}" placeholder="Blood group"/>
+            <input type="text" th:field="*{bloodRhD}" placeholder="Blood Rhd"/>
+
+            <button type="submit">Add</button>
+        </form>
+        <hr>
+        <a th:href="@{/personnel}">Personnel</a>
+    </div>
+</body>
+</html>

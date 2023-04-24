@@ -1,22 +1,40 @@
 package com.codegans.arreg.controller;
 
+import com.codegans.arreg.model.dto.PersonDto;
+import com.codegans.arreg.service.PersonnelService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-/**
- * Java doc here
- *
- * @author Sniesariev Vitalii
- * @since 21/04/2023
- */
 @Controller
+@RequiredArgsConstructor
 public class PersonController {
+    private final PersonnelService personnelService;
 
-    @GetMapping("/greeting")
-    public String personList(@RequestParam(name = "name", required = false, defaultValue = "World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "greeting";
+    @GetMapping("/personnel")
+    public String personnel(Model model) {
+        model.addAttribute("personnel", personnelService.getAllPersonnel());
+        return "personnel";
     }
+
+    @GetMapping("/personnel/{id}")
+    public String person(@PathVariable(value = "id") String id, Model model){
+        PersonDto personDto = personnelService.getById(id);
+        model.addAttribute("person", personDto);
+        return "person";
+    }
+
+    @GetMapping("/personnel/add")
+    public String addPerson(Model model) {
+        model.addAttribute("person", new PersonDto());
+        return "addPerson";
+    }
+
+    @PostMapping("/personnel/save")
+    public String savePerson(@ModelAttribute("person") PersonDto personDto) {
+        personnelService.savePerson(personDto);
+        return "redirect:/personnel";
+    }
+
 }
