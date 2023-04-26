@@ -1,0 +1,11 @@
+insert into PERSON (ID,LAST_NAME,FIRST_NAME,MIDDLE_NAME,BIRTH_DATE,BIRTH_PLACE,ITN,BLOOD_GROUP,BLOOD_RHD) values ('76f8eeea-e361-4aa2-909c-ac1e3221a91b','Іванов','Іван','Іванович',date '1980-10-01','Київ','0123456789','A','POSITIVE');
+insert into PERSON (ID,LAST_NAME,FIRST_NAME,MIDDLE_NAME,BIRTH_DATE,BIRTH_PLACE,ITN,BLOOD_GROUP,BLOOD_RHD) values ('9522ee09-8aff-46f5-82c3-bf10767a9dd7','Петров','Петро','Петрович',date '2000-05-05','Житомир','1234567890','B','NEGATIVE');
+
+insert into MILITARY_IDENTITY_CARD (ID, SERIAL_NUMBER, PERSON_ID, ISSUED_BY, ISSUED_AT, EDUCATION, CIVIL_OCCUPATION, MARITAL_STATUS) values ('561ebb18-8d5a-41e6-8497-dc815bbf1fd1','МО:345678','76f8eeea-e361-4aa2-909c-ac1e3221a91b','Київський виконком',date '2022-08-12','Середнє','Машиніст-асфальтоукладчик','MARRIED');
+insert into MILITARY_IDENTITY_CARD (ID, SERIAL_NUMBER, PERSON_ID, ISSUED_BY, ISSUED_AT, EDUCATION, CIVIL_OCCUPATION, MARITAL_STATUS) values ('35b541b6-cb86-44b7-986c-63be9baad10c','МО:834567','9522ee09-8aff-46f5-82c3-bf10767a9dd7','Житомирський виконком',date '2021-02-22','Середнє','Укладчик','SINGLE');
+
+insert into TRANSFER (ID, DIRECTION, REASON, STARTED_AT, PERSON_ID) values ('54ae5514-9cf6-45c0-8e7b-deb56d86df92', 'IN','VACATION_FAMILY',date '2023-01-01','76f8eeea-e361-4aa2-909c-ac1e3221a91b' );
+insert into VACATION_TRANSFER (TRANSFER_ID, PLANNED_DAYS) values ('54ae5514-9cf6-45c0-8e7b-deb56d86df92',10);
+
+insert into TRANSFER (ID, DIRECTION, REASON, STARTED_AT, PERSON_ID) values ('2cfc2749-810a-43f2-9690-74db3a829fa5', 'IN','MEDICAL_TREATMENT',date '2022-12-07','9522ee09-8aff-46f5-82c3-bf10767a9dd7' );
+insert into MEDICAL_TRANSFER (TRANSFER_ID, CLINIC, DIAGNOSTIC) values ('2cfc2749-810a-43f2-9690-74db3a829fa5', 'Київський Обласний Госпіталь', 'Covid');

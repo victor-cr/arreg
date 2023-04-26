@@ -1,6 +1,8 @@
 package com.codegans.arreg.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,7 +20,9 @@ public class Transfer {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private  UUID id;
+    @Enumerated(EnumType.STRING)
     private  Direction direction;
+    @Enumerated(EnumType.STRING)
     private  Reason reason;
     private  LocalDate startedAt;
     @OneToOne(optional = false)

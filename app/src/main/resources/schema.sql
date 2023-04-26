@@ -12,7 +12,8 @@ create table PERSON (
 alter table PERSON add constraint UNQ_PERSON_ITN unique(ITN);
 
 create table MILITARY_IDENTITY_CARD (
-    SERIAL_NUMBER varchar(50) primary key,
+    ID uuid not null primary key,
+    SERIAL_NUMBER varchar(50) not null ,
     PERSON_ID uuid not null,
     ISSUED_BY varchar(200) not null,
     ISSUED_AT date not null,

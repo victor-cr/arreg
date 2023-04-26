@@ -3,6 +3,8 @@ package com.codegans.arreg.model;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,18 +20,20 @@ import java.util.UUID;
 public final class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private  UUID id;
-    private  String lastName;
-    private  String firstName;
-    private  String middleName;
-    private  LocalDate birthDate;
-    private  String birthPlace;
-    @Column(unique=true)
-    private  String itn;
-    private  BloodGroup bloodGroup;
-    private  BloodRhD bloodRhD;
-    @OneToOne(optional = true)
-    private MilitaryIdentityCard  militaryIdentityCard;
+    private UUID id;
+    private String lastName;
+    private String firstName;
+    private String middleName;
+    private LocalDate birthDate;
+    private String birthPlace;
+    @Column(unique = true)
+    private String itn;
+    @Enumerated(EnumType.STRING)
+    private BloodGroup bloodGroup;
+    @Enumerated(EnumType.STRING)
+    private BloodRhD bloodRhD;
+    @OneToOne(optional = true, mappedBy = "person")
+    private MilitaryIdentityCard militaryIdentityCard;
     @OneToMany(cascade = CascadeType.ALL)
     private List<VacationTransfer> vacationTransfers;
     @OneToMany(cascade = CascadeType.ALL)
