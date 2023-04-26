@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:arregdb
+    username: sa
+    password: password
+    driverClassname: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto:  none
+    show-sql: true
+  sql:
+    init:
+      mode: always
+      encoding: UTF-8
+  h2:
+    console:
+      enabled: true
+  thymeleaf:
+    encoding: UTF-8

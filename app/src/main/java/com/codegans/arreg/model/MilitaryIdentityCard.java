@@ -1,22 +1,29 @@
 package com.codegans.arreg.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 public final class MilitaryIdentityCard {
     @Id
+    private UUID id;
     private String serialNumber;
     @OneToOne(optional = false)
+    @JoinColumn(name="PERSON_ID",referencedColumnName = "ID")
     private Person person;
     private String issuedBy;
     private LocalDate issuedAt;
     private String education;
     private String civilOccupation;
+    @Enumerated(EnumType.STRING)
     private MaritalStatus maritalStatus;
 
 
@@ -39,6 +46,10 @@ public final class MilitaryIdentityCard {
         this.education = education;
         this.civilOccupation = civilOccupation;
         this.maritalStatus = maritalStatus;
+    }
+
+    public UUID id() {
+        return id;
     }
 
     public String serialNumber() {
@@ -74,7 +85,8 @@ public final class MilitaryIdentityCard {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (MilitaryIdentityCard) obj;
-        return Objects.equals(this.serialNumber, that.serialNumber) &&
+        return Objects.equals(this.id, that.id) &&
+                Objects.equals(this.serialNumber, that.serialNumber) &&
                 Objects.equals(this.person, that.person) &&
                 Objects.equals(this.issuedBy, that.issuedBy) &&
                 Objects.equals(this.issuedAt, that.issuedAt) &&
@@ -85,12 +97,13 @@ public final class MilitaryIdentityCard {
 
     @Override
     public int hashCode() {
-        return Objects.hash(serialNumber, person, issuedBy, issuedAt, education, civilOccupation, maritalStatus);
+        return Objects.hash(id, serialNumber, person, issuedBy, issuedAt, education, civilOccupation, maritalStatus);
     }
 
     @Override
     public String toString() {
         return "MilitaryIdentityCard[" +
+                "ID=" + id + "," +
                 "serialNumber=" + serialNumber + ", " +
                 "person=" + person + ", " +
                 "issuedBy=" + issuedBy + ", " +
