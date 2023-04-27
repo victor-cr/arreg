@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create transfer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="row gx-5 mt-5">
+        <div class="col-md-2">
+            <nav class="nav flex-column">
+                <a class="nav-link" href="/personnel">Personnel</a>
+                <a class="nav-link active" href="/transfers/add">Transfer</a>
+            </nav>
+        </div>
+        <div class="col-md">
+            <h2>Add Transfer</h2>
+            <br/>
+            <div class="col-md-3">
+                <form action="#" th:action="@{/transfers/save}" th:object="${transfer}" method="POST">
+
+                    <div class="mb-3">
+                        <label for="person" class="form-label">Person</label>
+                        <select th:field="*{personId}" id="person" class="form-select">
+                            <option th:if="${selectedPerson != null}" th:value="${selectedPerson.id}" th:text="${selectedPerson.lastName + ' ' + selectedPerson.firstName + ' ' + selectedPerson.middleName}" selected></option>
+                            <option th:if="${personnel != null}" th:text="''" th:value="${null}"></option>
+                            <option th:if="${personnel != null}" th:each="person : ${personnel}" th:value="${person.id}" th:text="${person.lastName + ' ' + person.firstName + ' ' + person.middleName}"></option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="direction" class="form-label">Direction</label>
+                        <select th:field="*{direction}" class="form-select" id="direction">
+                            <option th:value="'OUT'" th:text="Out" selected></option>
+                            <option th:value="'IN'" th:text="In"></option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Date</label>
+                        <input type="date" th:field="*{startDate}" id="date" class="form-control"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Type</label>
+                        <select th:field="*{type}" class="form-select" id="type">
+                            <option th:each="type : ${T(com.codegans.arreg.model.TransferType).values()}" th:value="${type}" th:text="${type.desc}"></option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="reason" class="form-label">Reason</label>
+                        <select th:field="*{reason}" class="form-select" id="reason">
+                            <option th:each="rsn : ${T(com.codegans.arreg.model.Reason).values()}"
+                                th:value="${rsn}" th:text="${rsn}"></option>
+                        </select>
+                    </div>
+
+                    <!-- Vacation additional fields -->
+                    <div>
+                        <div class="mb-3">
+                            <label for="vacation-days" class="form-label">Vacation days</label>
+                            <input type="number" min="1" th:field="*{vacationDays}" id="vacation-days" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <!-- Medical additional fields -->
+                    <div>
+                        <div class="mb-3">
+                            <label for="clinic" class="form-label">Clinic</label>
+                            <input type="text" th:field="*{clinic}" id="clinic" class="form-control"/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="diagnosis" class="form-label">Diagnosis</label>
+                            <input type="text" th:field="*{diagnosis}" id="diagnosis" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <!-- Assessment additional fields -->
+                    <div>
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" th:field="*{location}" id="location" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -3,12 +3,12 @@ package com.codegans.arreg.service;
 import com.codegans.arreg.model.BloodGroup;
 import com.codegans.arreg.model.BloodRhD;
 import com.codegans.arreg.model.Person;
-import com.codegans.arreg.model.RegularTransfer;
 import com.codegans.arreg.model.dto.FullPersonInfo;
 import com.codegans.arreg.model.dto.MilitaryIDCardDto;
 import com.codegans.arreg.model.dto.PersonDto;
 import com.codegans.arreg.model.dto.TransferDto;
 import com.codegans.arreg.repository.PersonRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,46 +18,46 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class PersonnelService {
     private final PersonRepository personRepository;
 
     public List<PersonDto> getAllPersonnel() {
-        return StreamSupport.stream(personRepository.findAll().spliterator(), false).map(PersonDto::new).toList();
+        return personRepository.findAll().stream().map(PersonDto::new).toList();
     }
 
-    public FullPersonInfo getById(String id) {
+    public PersonDto getById(String id) {
         Person person = personRepository.findById(UUID.fromString(id)).orElse(null);
-        return person != null
-                ? new FullPersonInfo(new PersonDto(person), new MilitaryIDCardDto(person.militaryIdentityCard()), convertTransfers(person))
-                : null;
+        return person == null ? null : new PersonDto(person);
+    }
+
+    public FullPersonInfo getByIdFullInfo(String id) {
+        Person person = personRepository.findById(UUID.fromString(id)).orElse(null);
+        if (person == null) {
+            return new FullPersonInfo();
+        }
+
+        MilitaryIDCardDto militaryIDCardDto =
+                person.militaryIdentityCard() == null
+                        ? new MilitaryIDCardDto()
+                        : new MilitaryIDCardDto(person.militaryIdentityCard());
+
+        return new FullPersonInfo(new PersonDto(person), militaryIDCardDto, convertTransfers(person));
     }
 
     private List<TransferDto> convertTransfers(Person person) {
-//        return Stream.of(person.regularTransfers(), person.medicalTransfers(), person.vacationTransfers(), person.assessmentTransfers())
-//                .flatMap(List::stream)
-//                .map(TransferDto::new)
-//                .sorted(Comparator.comparing(TransferDto::getStartDate).reversed())
-//                .toList();
-        TransferDto transfer1 = new TransferDto();
-        transfer1.setDirection("OUT");
-        transfer1.setType("Regular");
-        transfer1.setReason("TRANSFER_REGULAR");
-        transfer1.setStartDate("2023-05-02");
+        List<TransferDto> transfers = new ArrayList<>();
+        transfers.addAll(person.regularTransfers().stream().map(TransferDto::new).toList());
+        transfers.addAll(person.medicalTransfers().stream().map(TransferDto::new).toList());
+        transfers.addAll(person.vacationTransfers().stream().map(TransferDto::new).toList());
+        transfers.addAll(person.assessmentTransfers().stream().map(TransferDto::new).toList());
 
-        TransferDto transfer2 = new TransferDto();
-        transfer2.setDirection("OUT");
-        transfer2.setType("Medical");
-        transfer2.setReason("MEDICAL_TREATMENT");
-        transfer2.setStartDate("2022-11-24");
-        transfer2.setDetails("Clinic: Dobrobut, Diagnosis: broken leg");
-
-        return Stream.of(transfer1, transfer2).sorted(Comparator.comparing(TransferDto::getStartDate).reversed()).toList();
-
+        return transfers.stream()
+                .sorted(Comparator.comparing(TransferDto::getStartDate).reversed())
+                .toList();
     }
 
     public void savePerson(PersonDto personDto) {

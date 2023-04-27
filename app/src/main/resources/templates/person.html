@@ -10,8 +10,8 @@
     <div class="row gx-5 mt-5">
         <div class="col-md-2">
             <nav class="nav flex-column">
-                <a class="nav-link active" href="/personnel">Personnel</a>
-                <a class="nav-link disabled">Transfer</a>
+                <a class="nav-link" href="/personnel">Personnel</a>
+                <a class="nav-link" href="/transfers/add">Transfer</a>
             </nav>
         </div>
         <div class="col-md">
@@ -78,6 +78,8 @@
 
             <h3 class="mt-4">Transfers</h3>
 
+            <a class="btn btn-primary" th:href="@{/transfers/add(personId=${person.id})}">Add Transfer</a>
+
             <table class="table mt-2">
                 <thead>
                     <tr>
@@ -93,7 +95,7 @@
                 <tr th:each="transfer:${transfers}">
                     <td th:text="${transfer.startDate}"></td>
                     <td th:text="${transfer.direction}"></td>
-                    <td th:text="${transfer.type}"></td>
+                    <td th:text="${transfer.type.desc}"></td>
                     <td th:text="${transfer.reason}"></td>
                     <td th:text="${transfer.details}"></td>
                 </tr>

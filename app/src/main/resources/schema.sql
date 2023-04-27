@@ -35,7 +35,7 @@ create table TRANSFER (
 create table MEDICAL_TRANSFER (
     TRANSFER_ID uuid not null primary key,
     CLINIC varchar(100) not null,
-    DIAGNOSTIC varchar(100) not null,
+    DIAGNOSIS varchar(100) not null,
     constraint FK_MEDICAL_TRANSFER foreign key (TRANSFER_ID) references TRANSFER(ID) on delete cascade
 );
 

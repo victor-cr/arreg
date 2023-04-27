@@ -2,10 +2,12 @@ package com.codegans.arreg.model.dto;
 
 import com.codegans.arreg.model.MilitaryIdentityCard;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.format.DateTimeFormatter;
 
 @Data
+@NoArgsConstructor
 public class MilitaryIDCardDto {
     private String id;
     private String serialNumber;

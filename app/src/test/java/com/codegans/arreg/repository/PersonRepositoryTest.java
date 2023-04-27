@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.stream.StreamSupport;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -26,9 +27,10 @@ class PersonRepositoryTest {
     void testAddPersons(){
         repository.save(new Person("Surname", "Name", "MiddleName", LocalDate.of(1979, 7, 7), "Kherson", "2121345643", BloodGroup.A, BloodRhD.POSITIVE));
         repository.save(new Person("Othersurname", "Othername", "MiddleName", LocalDate.of(1993, 3, 23), "Kyiv", "6343214531", BloodGroup.AB, BloodRhD.NULL));
+        List<String> createdItns = List.of("2121345643", "6343214531");
 
-        Iterable<Person> persons = repository.findAll();
-        assertEquals(2, StreamSupport.stream(persons.spliterator(),false).count());
+        List<Person> persons = repository.findAll();
+        assertEquals(2, persons.stream().filter(person -> createdItns.contains(person.itn())).count());
     }
 
 }

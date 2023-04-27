@@ -9,11 +9,16 @@ import java.time.format.DateTimeFormatter;
 @Data
 @NoArgsConstructor
 public class TransferDto {
-    private String type;
+    private TransferType type;
     private String direction;
     private String reason;
     private String startDate;
     private String details;
+    private String personId;
+    private Integer vacationDays;
+    private String clinic;
+    private String diagnosis;
+    private String location;
 
     public TransferDto(Transfer transfer) {
         this.direction = transfer.direction().name();
@@ -23,24 +28,28 @@ public class TransferDto {
 
     public TransferDto(RegularTransfer transfer) {
         this((Transfer) transfer);
-        this.type = "Regular";
+        this.type = TransferType.REGULAR;
     }
 
     public TransferDto(MedicalTransfer transfer) {
         this((Transfer) transfer);
-        this.type = "Medical";
+        this.type = TransferType.MEDICAL;
+        this.clinic = transfer.clinic();
+        this.diagnosis = transfer.diagnosis();
         this.details = String.format("Clinic: %s, Diagnosis: %s", transfer.clinic(), transfer.diagnosis());
     }
 
     public TransferDto(VacationTransfer transfer) {
         this((Transfer) transfer);
-        this.type = "Vacation";
+        this.type = TransferType.VACATION;
+        this.vacationDays = transfer.plannedDays();
         this.details = String.format("Planed for %d days", transfer.plannedDays());
     }
 
     public TransferDto(AssessmentTransfer transfer) {
         this((Transfer) transfer);
-        this.type = "Assessment";
+        this.type = TransferType.ASSESSMENT;
+        this.location = transfer.location();
         this.details = String.format("Transferred to %s", transfer.location());
     }
 

@@ -21,7 +21,7 @@ public class PersonController {
 
     @GetMapping("/personnel/{id}")
     public String person(@PathVariable(value = "id") String id, Model model){
-        FullPersonInfo fullPersonInfo = personnelService.getById(id);
+        FullPersonInfo fullPersonInfo = personnelService.getByIdFullInfo(id);
         model.addAttribute("person", fullPersonInfo.getPerson());
         model.addAttribute("militaryCard", fullPersonInfo.getMilitaryIDCard());
         model.addAttribute("transfers", fullPersonInfo.getTransfers());

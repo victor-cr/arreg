@@ -10,7 +10,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -35,13 +34,13 @@ public final class Person {
     private BloodRhD bloodRhD;
     @OneToOne(optional = true, mappedBy = "person")
     private MilitaryIdentityCard militaryIdentityCard;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy="person")
     private List<VacationTransfer> vacationTransfers;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy="person")
     private List<MedicalTransfer> medicalTransfers;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy="person")
     private List<RegularTransfer> regularTransfers;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy="person")
     private List<AssessmentTransfer> assessmentTransfers;
 
     public Person() {

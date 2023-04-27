@@ -1,6 +1,16 @@
 package com.codegans.arreg.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -8,6 +18,7 @@ import java.util.UUID;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "TRANSFER")
 public class Transfer {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -17,7 +28,8 @@ public class Transfer {
     @Enumerated(EnumType.STRING)
     private  Reason reason;
     private  LocalDate startedAt;
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
+    @JoinColumn(name="PERSON_ID", nullable=false)
     private Person person;
 
     public Transfer() {
