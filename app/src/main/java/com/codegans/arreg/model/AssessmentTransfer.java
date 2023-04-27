@@ -1,11 +1,13 @@
 package com.codegans.arreg.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
+@PrimaryKeyJoinColumn(name = "TRANSFER_ID")
 public final class AssessmentTransfer extends Transfer {
 
     private String location;

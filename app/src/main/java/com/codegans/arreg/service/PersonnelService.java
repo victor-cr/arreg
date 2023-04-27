@@ -1,10 +1,9 @@
 package com.codegans.arreg.service;
 
-import com.codegans.arreg.model.BloodGroup;
-import com.codegans.arreg.model.BloodRhD;
-import com.codegans.arreg.model.Person;
+import com.codegans.arreg.model.*;
 import com.codegans.arreg.model.dto.PersonDto;
 import com.codegans.arreg.repository.PersonRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +15,7 @@ import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class PersonnelService {
     private final PersonRepository personRepository;
 

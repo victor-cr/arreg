@@ -1,10 +1,12 @@
 package com.codegans.arreg.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 
 import java.time.LocalDate;
 
 @Entity
+@PrimaryKeyJoinColumn(name = "TRANSFER_ID")
 public final class RegularTransfer extends Transfer {
 
     public RegularTransfer() {
