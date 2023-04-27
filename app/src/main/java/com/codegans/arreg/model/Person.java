@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -101,6 +102,26 @@ public final class Person {
 
     public BloodRhD bloodRhD() {
         return bloodRhD;
+    }
+
+    public MilitaryIdentityCard militaryIdentityCard() {
+        return militaryIdentityCard;
+    }
+
+    public List<RegularTransfer> regularTransfers() {
+        return regularTransfers;
+    }
+
+    public List<VacationTransfer> vacationTransfers() {
+        return vacationTransfers;
+    }
+
+    public List<MedicalTransfer> medicalTransfers() {
+        return medicalTransfers;
+    }
+
+    public List<AssessmentTransfer> assessmentTransfers() {
+        return assessmentTransfers;
     }
 
     @Override

@@ -3,17 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <title>Person</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div>
-        <p>Last name: <span th:text="${person.lastName}"></span></p>
-        <p>First name: <span th:text="${person.firstName}"></span></p>
-        <p>Middle name: <span th:text="${person.middleName}"></span></p>
-        <p>Birth date: <span th:text="${person.birthDate}"></span></p>
-        <p>Birth place: <span th:text="${person.birthPlace}"></span></p>
-        <p>Itn: <span th:text="${person.itn}"></span></p>
-        <p>Blood group: <span th:text="${person.bloodGroup}"></span></p>
-        <p>Blood RhD: <span th:text="${person.bloodRhD}"></span></p>
+<div class="container">
+    <div class="row gx-5 mt-5">
+        <div class="col-md-2">
+            <nav class="nav flex-column">
+                <a class="nav-link active" href="/personnel">Personnel</a>
+                <a class="nav-link disabled">Transfer</a>
+            </nav>
+        </div>
+        <div class="col-md">
+            <h2 th:text="${person.lastName + ' ' + person.firstName + ' ' + person.middleName}"></h2>
+            <table class="table table-bordered border-dark mt-4">
+                <tbody>
+                <tr>
+                    <td class="table-secondary col-md-1">Full name</td>
+                    <td class="col-md-4" th:text="${person.lastName + ' ' + person.firstName + ' ' + person.middleName}"></td>
+                </tr>
+                <tr>
+                    <td class="table-secondary">Itn</td>
+                    <td th:text="${person.itn}"></td>
+                </tr>
+                <tr>
+                    <td class="table-secondary">Birth date</td>
+                    <td th:text="${person.birthDate}"></td>
+                </tr>
+                <tr>
+                    <td class="table-secondary">Birth place</td>
+                    <td th:text="${person.birthPlace}"></td>
+                </tr>
+                <tr>
+                    <td class="table-secondary">Blood group</td>
+                    <td th:text="${person.bloodGroup}"></td>
+                </tr>
+                <tr>
+                    <td class="table-secondary">Blood RhD</td>
+                    <td th:text="${person.bloodRhD}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h3 class="mt-4">Military Identity Card</h3>
+
+            <table class="table table-bordered border-dark mt-2">
+                <tbody>
+                    <tr>
+                        <td class="table-secondary col-md-1">Serial number</td>
+                        <td th:text="${militaryCard.serialNumber}" class="col-md-4"></td>
+                    </tr>
+                    <tr>
+                        <td class="table-secondary">Issued by</td>
+                        <td th:text="${militaryCard.issuedBy}"></td>
+                    </tr>
+                    <tr>
+                        <td class="table-secondary">Issued At</td>
+                        <td th:text="${militaryCard.issuedAt}"></td>
+                    </tr>
+                    <tr>
+                        <td class="table-secondary">Education</td>
+                        <td th:text="${militaryCard.education}"></td>
+                    </tr>
+                    <tr>
+                        <td class="table-secondary">Occupation</td>
+                        <td th:text="${militaryCard.civilOccupation}"></td>
+                    </tr>
+                    <tr>
+                        <td class="table-secondary">Marital status</td>
+                        <td th:text="${militaryCard.maritalStatus}"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="mt-4">Transfers</h3>
+
+            <table class="table mt-2">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Direction</th>
+                        <th>Type</th>
+                        <th>Reason</th>
+                        <th>Details</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="transfer:${transfers}">
+                    <td th:text="${transfer.startDate}"></td>
+                    <td th:text="${transfer.direction}"></td>
+                    <td th:text="${transfer.type}"></td>
+                    <td th:text="${transfer.reason}"></td>
+                    <td th:text="${transfer.details}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
+
 </body>
 </html>
