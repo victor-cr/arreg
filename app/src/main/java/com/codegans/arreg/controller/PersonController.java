@@ -1,5 +1,6 @@
 package com.codegans.arreg.controller;
 
+import com.codegans.arreg.model.dto.FullPersonInfo;
 import com.codegans.arreg.model.dto.PersonDto;
 import com.codegans.arreg.service.PersonnelService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +21,10 @@ public class PersonController {
 
     @GetMapping("/personnel/{id}")
     public String person(@PathVariable(value = "id") String id, Model model){
-        PersonDto personDto = personnelService.getById(id);
-        model.addAttribute("person", personDto);
+        FullPersonInfo fullPersonInfo = personnelService.getByIdFullInfo(id);
+        model.addAttribute("person", fullPersonInfo.getPerson());
+        model.addAttribute("militaryCard", fullPersonInfo.getMilitaryIDCard());
+        model.addAttribute("transfers", fullPersonInfo.getTransfers());
         return "person";
     }
 

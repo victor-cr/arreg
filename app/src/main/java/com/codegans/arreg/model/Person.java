@@ -103,16 +103,20 @@ public final class Person {
         return bloodRhD;
     }
 
+    public MilitaryIdentityCard militaryIdentityCard() {
+        return militaryIdentityCard;
+    }
+
+    public List<RegularTransfer> regularTransfers() {
+        return regularTransfers;
+    }
+
     public List<VacationTransfer> vacationTransfers() {
         return vacationTransfers;
     }
 
     public List<MedicalTransfer> medicalTransfers() {
         return medicalTransfers;
-    }
-
-    public List<RegularTransfer> regularTransfers() {
-        return regularTransfers;
     }
 
     public List<AssessmentTransfer> assessmentTransfers() {
